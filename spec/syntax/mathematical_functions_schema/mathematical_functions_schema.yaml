@@ -2893,7 +2893,7 @@ schemas:
       kind: EXPLICIT
       type:
         _class: Expressir::Model::DataTypes::Real
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: real_part
       kind: DERIVED
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -2931,7 +2931,8 @@ schemas:
               _class: Expressir::Model::References::SimpleReference
               id: argument
               base_path: mathematical_functions_schema.complex_number_literal_polar.argument
-    - _class: Expressir::Model::Declarations::Attribute
+      _class: Expressir::Model::Declarations::DerivedAttribute
+    - id: imag_part
       kind: DERIVED
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -2969,6 +2970,7 @@ schemas:
               _class: Expressir::Model::References::SimpleReference
               id: argument
               base_path: mathematical_functions_schema.complex_number_literal_polar.argument
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -3372,7 +3374,7 @@ schemas:
           _class: Expressir::Model::References::SimpleReference
           id: maths_expression
           base_path: mathematical_functions_schema.maths_expression
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operands
       kind: DERIVED
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -3427,6 +3429,7 @@ schemas:
               _class: Expressir::Model::References::SimpleReference
               id: arguments
               base_path: mathematical_functions_schema.function_application.arguments
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -3583,7 +3586,6 @@ schemas:
     - id: size
       remarks:
       - The derived number of integers which are members of the interval.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -3610,6 +3612,7 @@ schemas:
         operand2:
           _class: Expressir::Model::Literals::Integer
           value: '1'
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -5124,7 +5127,6 @@ schemas:
       remarks:
       - The derived tuple space whose members are all the ordered tuples of inputs
         to which this function may properly be applied.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -5139,6 +5141,7 @@ schemas:
         parameters:
         - _class: Expressir::Model::References::SimpleReference
           id: SELF
+      _class: Expressir::Model::Declarations::DerivedAttribute
     - id: range
       remarks:
       - |-
@@ -5151,7 +5154,6 @@ schemas:
         NOTE: Most functions have a single output. However, for reasons of symmetry, and also to permit the modeling of "procedures" which return multiple outputs through the use of "VAR" arguments, the possibility of multiple outputs is permitted. In fact, the possibility of functions producing an indefinite number of outputs is permitted. (Consider the scanf() function in the C programming language.)
 
         NOTE: See also the note about dual inheritance in <<express:mathematical_functions_schema.maths_space,maths_space>>.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -5166,6 +5168,7 @@ schemas:
         parameters:
         - _class: Expressir::Model::References::SimpleReference
           id: SELF
+      _class: Expressir::Model::Declarations::DerivedAttribute
   - id: finite_function
     remarks:
     - |-
@@ -5456,7 +5459,8 @@ schemas:
     - _class: Expressir::Model::References::SimpleReference
       id: unary_generic_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operand
+      _class: Expressir::Model::Declarations::Attribute
       kind: EXPLICIT
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -5503,7 +5507,8 @@ schemas:
     - _class: Expressir::Model::References::SimpleReference
       id: unary_generic_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operand
+      _class: Expressir::Model::Declarations::Attribute
       kind: EXPLICIT
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -5596,6 +5601,7 @@ schemas:
                   function:
                     _class: Expressir::Model::References::SimpleReference
                     id: operand
+                    base_path: mathematical_functions_schema.repackaging_function.operand
                 attribute:
                   _class: Expressir::Model::References::SimpleReference
                   id: domain
@@ -5635,6 +5641,7 @@ schemas:
                     function:
                       _class: Expressir::Model::References::SimpleReference
                       id: operand
+                      base_path: mathematical_functions_schema.repackaging_function.operand
                   attribute:
                     _class: Expressir::Model::References::SimpleReference
                     id: domain
@@ -5680,6 +5687,7 @@ schemas:
                   function:
                     _class: Expressir::Model::References::SimpleReference
                     id: operand
+                    base_path: mathematical_functions_schema.repackaging_function.operand
                 attribute:
                   _class: Expressir::Model::References::SimpleReference
                   id: range
@@ -5719,6 +5727,7 @@ schemas:
                     function:
                       _class: Expressir::Model::References::SimpleReference
                       id: operand
+                      base_path: mathematical_functions_schema.repackaging_function.operand
                   attribute:
                     _class: Expressir::Model::References::SimpleReference
                     id: range
@@ -5800,6 +5809,7 @@ schemas:
                 function:
                   _class: Expressir::Model::References::SimpleReference
                   id: operand
+                  base_path: mathematical_functions_schema.repackaging_function.operand
               attribute:
                 _class: Expressir::Model::References::SimpleReference
                 id: range
@@ -5826,7 +5836,8 @@ schemas:
     - _class: Expressir::Model::References::SimpleReference
       id: unary_generic_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operand
+      _class: Expressir::Model::Declarations::Attribute
       kind: EXPLICIT
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -5947,7 +5958,8 @@ schemas:
     - _class: Expressir::Model::References::SimpleReference
       id: multiple_arity_generic_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operands
+      _class: Expressir::Model::Declarations::Attribute
       kind: EXPLICIT
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -6054,7 +6066,7 @@ schemas:
         _class: Expressir::Model::References::SimpleReference
         id: maths_function_select
         base_path: mathematical_functions_schema.maths_function_select
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operands
       kind: DERIVED
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -6102,6 +6114,7 @@ schemas:
             _class: Expressir::Model::References::SimpleReference
             id: final_function
             base_path: mathematical_functions_schema.parallel_composed_function.final_function
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -6408,7 +6421,7 @@ schemas:
           id: "?"
         base_type:
           _class: Expressir::Model::DataTypes::Real
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: shape
       kind: DERIVED
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -6449,6 +6462,7 @@ schemas:
               _class: Expressir::Model::References::SimpleReference
               id: values
               base_path: mathematical_functions_schema.listed_real_data.values
+      _class: Expressir::Model::Declarations::DerivedAttribute
   - id: listed_integer_data
     remarks:
     - |-
@@ -6480,7 +6494,7 @@ schemas:
           id: "?"
         base_type:
           _class: Expressir::Model::DataTypes::Integer
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: shape
       kind: DERIVED
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -6521,6 +6535,7 @@ schemas:
               _class: Expressir::Model::References::SimpleReference
               id: values
               base_path: mathematical_functions_schema.listed_integer_data.values
+      _class: Expressir::Model::Declarations::DerivedAttribute
   - id: listed_logical_data
     remarks:
     - |-
@@ -6552,7 +6567,7 @@ schemas:
           id: "?"
         base_type:
           _class: Expressir::Model::DataTypes::Logical
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: shape
       kind: DERIVED
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -6593,6 +6608,7 @@ schemas:
               _class: Expressir::Model::References::SimpleReference
               id: values
               base_path: mathematical_functions_schema.listed_logical_data.values
+      _class: Expressir::Model::Declarations::DerivedAttribute
   - id: listed_string_data
     remarks:
     - |-
@@ -6624,7 +6640,7 @@ schemas:
           id: "?"
         base_type:
           _class: Expressir::Model::DataTypes::String
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: shape
       kind: DERIVED
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -6665,6 +6681,7 @@ schemas:
               _class: Expressir::Model::References::SimpleReference
               id: values
               base_path: mathematical_functions_schema.listed_string_data.values
+      _class: Expressir::Model::Declarations::DerivedAttribute
   - id: listed_complex_number_data
     remarks:
     - |-
@@ -6697,7 +6714,7 @@ schemas:
           id: "?"
         base_type:
           _class: Expressir::Model::DataTypes::Real
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: shape
       kind: DERIVED
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -6744,6 +6761,7 @@ schemas:
           operand2:
             _class: Expressir::Model::Literals::Integer
             value: '2'
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -6826,7 +6844,7 @@ schemas:
         _class: Expressir::Model::References::SimpleReference
         id: maths_space
         base_path: mathematical_functions_schema.maths_space
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: shape
       kind: DERIVED
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -6867,6 +6885,7 @@ schemas:
               _class: Expressir::Model::References::SimpleReference
               id: values
               base_path: mathematical_functions_schema.listed_data.values
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -7010,7 +7029,8 @@ schemas:
     - _class: Expressir::Model::References::SimpleReference
       id: unary_generic_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operand
+      _class: Expressir::Model::Declarations::Attribute
       kind: EXPLICIT
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -7043,7 +7063,6 @@ schemas:
       - The short, convenient synonym for the inherited *operand* attribute. This
         is the source for independent individual values from which the output is produced.
         The indexing function used is determined by the subtype.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -7062,6 +7081,7 @@ schemas:
         attribute:
           _class: Expressir::Model::References::SimpleReference
           id: operand
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -8139,7 +8159,8 @@ schemas:
     - _class: Expressir::Model::References::SimpleReference
       id: multiple_arity_generic_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operands
+      _class: Expressir::Model::Declarations::Attribute
       kind: EXPLICIT
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -8191,7 +8212,6 @@ schemas:
       - Function providing starting locations in *loc* and *val* for the non-default
         pairs in each row (if *order* = *by_rows*&#x200c;) or column (if *order* =
         *by_columns*&#x200c;). Derived to be the same as the first operand.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -8215,13 +8235,13 @@ schemas:
         index1:
           _class: Expressir::Model::Literals::Integer
           value: '1'
+      _class: Expressir::Model::Declarations::DerivedAttribute
     - id: loc
       remarks:
       - Function providing the column indices of the non-default positions (if *order*
         = *by_rows*&#x200c;) or the row indices of the non-default positions (if *order*
         = *by_columns*&#x200c;) in the order determined for the non-default positions
         by *order*. Derived to be the same as the second operand.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -8245,11 +8265,11 @@ schemas:
         index1:
           _class: Expressir::Model::Literals::Integer
           value: '2'
+      _class: Expressir::Model::Declarations::DerivedAttribute
     - id: val
       remarks:
       - Function providing the output values for the non-default positions in one-to-one
         correspondence with *loc*. Derived to be the same as the third operand.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -8273,6 +8293,7 @@ schemas:
         index1:
           _class: Expressir::Model::Literals::Integer
           value: '3'
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -8529,7 +8550,8 @@ schemas:
     - _class: Expressir::Model::References::SimpleReference
       id: unary_generic_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operand
+      _class: Expressir::Model::Declarations::Attribute
       kind: EXPLICIT
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -8562,7 +8584,6 @@ schemas:
       remarks:
       - The function giving the matrix of coefficients of the homogeneous linear function.
         Derived to be the same as the inherited *operand* value.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -8581,6 +8602,7 @@ schemas:
         attribute:
           _class: Expressir::Model::References::SimpleReference
           id: operand
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -8679,7 +8701,8 @@ schemas:
     - _class: Expressir::Model::References::SimpleReference
       id: unary_generic_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operand
+      _class: Expressir::Model::Declarations::Attribute
       kind: EXPLICIT
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -8711,7 +8734,6 @@ schemas:
       remarks:
       - The function giving the matrix of coefficients of the general linear function.
         Derived to be the same as the inherited *operand* value.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -8730,6 +8752,7 @@ schemas:
         attribute:
           _class: Expressir::Model::References::SimpleReference
           id: operand
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -8872,7 +8895,6 @@ schemas:
       - The order of the B-spline representation. Equivalently, the number of degrees
         of freedom in the polynomials making up the basis functions. Equivalently,
         one more than the degree of the polynomials making up the basis functions.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -8890,10 +8912,10 @@ schemas:
         operand2:
           _class: Expressir::Model::Literals::Integer
           value: '1'
+      _class: Expressir::Model::Declarations::DerivedAttribute
     - id: num_basis
       remarks:
       - The number of basis functions.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -8919,6 +8941,7 @@ schemas:
             _class: Expressir::Model::References::SimpleReference
             id: order
             base_path: mathematical_functions_schema.b_spline_basis.order
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -9017,7 +9040,8 @@ schemas:
     - _class: Expressir::Model::References::SimpleReference
       id: unary_generic_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operand
+      _class: Expressir::Model::Declarations::Attribute
       kind: EXPLICIT
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -9059,7 +9083,6 @@ schemas:
       - The multi-dimensional table function providing the coefficients for each combination
         of a tensor product of basis functions and an elementary output variable.
         Derived to be the same as the inherited *operand* attribute.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -9078,6 +9101,7 @@ schemas:
         attribute:
           _class: Expressir::Model::References::SimpleReference
           id: operand
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -9260,7 +9284,8 @@ schemas:
     - _class: Expressir::Model::References::SimpleReference
       id: unary_generic_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operand
+      _class: Expressir::Model::Declarations::Attribute
       kind: EXPLICIT
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -9284,7 +9309,6 @@ schemas:
       - The function whose output tuples are treated as homogeneous coordinates and
         from which the rationalized function is constructed. Derived to be the same
         as the inherited *operand* attribute.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -9303,6 +9327,7 @@ schemas:
         attribute:
           _class: Expressir::Model::References::SimpleReference
           id: operand
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -9456,7 +9481,8 @@ schemas:
     - _class: Expressir::Model::References::SimpleReference
       id: unary_generic_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operand
+      _class: Expressir::Model::Declarations::Attribute
       kind: EXPLICIT
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -9509,7 +9535,6 @@ schemas:
       remarks:
       - The function whose partial derivative is to be represented. Derived to be
         the same as the inherited *operand* attribute.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -9528,6 +9553,7 @@ schemas:
         attribute:
           _class: Expressir::Model::References::SimpleReference
           id: operand
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -9645,7 +9671,6 @@ schemas:
     - id: derivand
       remarks:
       - The expression to be differentiated. Derived to be the inherited *SELF\unary_generic_expression.operand.*
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -9663,6 +9688,7 @@ schemas:
         attribute:
           _class: Expressir::Model::References::SimpleReference
           id: operand
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -9831,7 +9857,8 @@ schemas:
     - _class: Expressir::Model::References::SimpleReference
       id: unary_generic_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: operand
+      _class: Expressir::Model::Declarations::Attribute
       kind: EXPLICIT
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -9881,7 +9908,6 @@ schemas:
       remarks:
       - The function whose integral is to be represented. Derived to be the same as
         the inherited *operand* attribute.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -9900,6 +9926,7 @@ schemas:
         attribute:
           _class: Expressir::Model::References::SimpleReference
           id: operand
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -10013,7 +10040,6 @@ schemas:
       remarks:
       - The expression to be integrated. Derived to be the first operand in the list
         inherited from supertype <<express:iso13584_generic_expressions_schema.multiple_arity_generic_expression,multiple_arity_generic_expression>>.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -10036,11 +10062,11 @@ schemas:
         index1:
           _class: Expressir::Model::Literals::Integer
           value: '1'
+      _class: Expressir::Model::Declarations::DerivedAttribute
     - id: variable_of_integration
       remarks:
       - The variable of integration. Derived to be the second operand in the list
         inherited from supertype <<express:iso13584_generic_expressions_schema.multiple_arity_generic_expression,multiple_arity_generic_expression>>.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -10064,7 +10090,8 @@ schemas:
         index1:
           _class: Expressir::Model::Literals::Integer
           value: '2'
-    - _class: Expressir::Model::Declarations::Attribute
+      _class: Expressir::Model::Declarations::DerivedAttribute
+    - id: variables
       kind: DERIVED
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -10100,6 +10127,7 @@ schemas:
             _class: Expressir::Model::References::SimpleReference
             id: variable_of_integration
             base_path: mathematical_functions_schema.definite_integral_expression.variable_of_integration
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -10222,7 +10250,7 @@ schemas:
       id: quantifier_expression
       base_path: mathematical_functions_schema.quantifier_expression
     attributes:
-    - _class: Expressir::Model::Declarations::Attribute
+    - id: variables
       kind: DERIVED
       supertype_attribute:
         _class: Expressir::Model::References::AttributeReference
@@ -10269,11 +10297,11 @@ schemas:
           attribute:
             _class: Expressir::Model::References::SimpleReference
             id: operands
+      _class: Expressir::Model::Declarations::DerivedAttribute
     - id: expr
       remarks:
       - The generic expression to which function abstraction is to be applied in order
         to construct a function.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -10296,6 +10324,7 @@ schemas:
         index1:
           _class: Expressir::Model::Literals::Integer
           value: '1'
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:
@@ -10382,7 +10411,6 @@ schemas:
     - id: expr
       remarks:
       - The expression which is to be recognized as denoting a function.
-      _class: Expressir::Model::Declarations::Attribute
       kind: DERIVED
       type:
         _class: Expressir::Model::References::SimpleReference
@@ -10400,6 +10428,7 @@ schemas:
         attribute:
           _class: Expressir::Model::References::SimpleReference
           id: operand
+      _class: Expressir::Model::Declarations::DerivedAttribute
     where_rules:
     - id: WR1
       remarks:

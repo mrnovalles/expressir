@@ -580,11 +580,16 @@ module Expressir
         ctx__redeclared_attribute = ctx.redeclared_attribute
         ctx__redeclared_attribute__qualified_attribute = ctx__redeclared_attribute&.qualified_attribute
         ctx__redeclared_attribute__attribute_id = ctx__redeclared_attribute&.attribute_id
-        ctx__redeclared_attribute__qualified_attribute__attribute_qualifier_attribute_id = ctx__redeclared_attribute__qualified_attribute&.attribute_qualifier&.attribute_ref&.attribute_id
 
-        id = visit_if(ctx__attribute_id || ctx__redeclared_attribute__attribute_id || ctx__redeclared_attribute__qualified_attribute__attribute_qualifier_attribute_id)
-        supertype_attribute = visit_if(ctx__redeclared_attribute__qualified_attribute)       
-        
+        attribute_qualifier = ctx__redeclared_attribute__qualified_attribute&.attribute_qualifier
+        attribute_id = attribute_qualifier&.attribute_ref&.attribute_id
+        ctx__redeclared_attribute__qualified_attribute__attribute_qualifier_attribute_id = attribute_id
+
+        id = visit_if(ctx__attribute_id ||
+          ctx__redeclared_attribute__attribute_id ||
+            ctx__redeclared_attribute__qualified_attribute__attribute_qualifier_attribute_id)
+        supertype_attribute = visit_if(ctx__redeclared_attribute__qualified_attribute)
+
         Model::Declarations::Attribute.new(
           id: id,
           supertype_attribute: supertype_attribute,
@@ -807,9 +812,8 @@ module Expressir
         type = visit_if(ctx__parameter_type)
         expression = visit_if(ctx__expression)
 
-        Model::Declarations::Attribute.new(
-          id: attribute.id, # reuse
-          kind: Model::Declarations::Attribute::DERIVED,
+        Model::Declarations::DerivedAttribute.new(
+          id: attribute.id,
           supertype_attribute: attribute.supertype_attribute, # reuse
           type: type,
           expression: expression,
